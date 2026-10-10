@@ -32,3 +32,8 @@ checks:
     rule: "lane map must equal the cards' own parsed Files: blocks and the working-tree change set (lane_map_verify) — derived, never transcribed"
     severity: block
     fixture: tests/release_harness/fixtures/dropped_path_lane_map
+  - id: duplicate-release-lane
+    incident: "t_3b42f921 (created 53s after t_a97c1916) both targeted PR #357 integration; both agents live — first claim (t_a97c1916) owns the lane, later dispatch stands down before any merge/pin mutation (same class as the earlier t_ad81e625 double-merge)"
+    rule: "before any release-lane mutation (merge/pin/tag), scan the board for a live sibling card targeting the same PR/branch and verify its claim age + pid liveness; the earlier live claim owns the lane, later dispatches must stand down and complete with a stand-down note"
+    severity: block
+    fixture: tests/release_harness/fixtures/duplicate_release_lane
