@@ -26,6 +26,9 @@ incident) and ask the model: *does this violate `<rule>`? (yes/no + one-line why
 | git-add-all-debris | block | yes — gitignored artifact tracked |
 | broken-main-uncommitted-helper | block | yes — import target not in branch |
 | false-route-premise | warn | yes — "missing" file actually exists |
+| env-replace-all | block | yes — replace-all write without prior full-map snapshot |
+| dropped-path-lane-map | block | yes — lane map missing a path the cards' Files: blocks claim |
+| duplicate-release-lane | block | yes — later live dispatch targeting an already-claimed PR lane |
 
 Add new rows whenever `check_library.yaml` grows (the E1 duty), so the eval set tracks
 the real failure surface.
