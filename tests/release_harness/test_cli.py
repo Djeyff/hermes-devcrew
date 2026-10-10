@@ -2,8 +2,9 @@
 import json
 import subprocess
 import sys
+from pathlib import Path
 
-REPO = "/Users/mustcompanymohsin/projects/mustCompany/must-dev-agents/hermes-devcrew"
+REPO = str(Path(__file__).resolve().parents[2])
 
 
 def _run(*args):
