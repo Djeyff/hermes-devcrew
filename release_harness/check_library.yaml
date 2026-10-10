@@ -22,6 +22,11 @@ checks:
     rule: "every import target must be a tracked file or in the release branch"
     severity: block
     fixture: tests/release_harness/fixtures/broken_main_import
+  - id: env-replace-all
+    incident: "RET-241 branch srlanes-5fix used deprecated replace-all variable writes plus destructive SQL, silently wiping ~11 env vars and updatedBy fields on a live service"
+    rule: "variable writes with destructive SQL in the same branch require a pre-write snapshot of the full variables map before merge"
+    severity: block
+    fixture: tests/release_harness/fixtures/env_replace_all
   - id: dropped-path-lane-map
     incident: "RET-246: lane map hand-transcribed from card prose dropped one of two paths on a single Files: bullet → file shipped with no lane's authority"
     rule: "lane map must equal the cards' own parsed Files: blocks and the working-tree change set (lane_map_verify) — derived, never transcribed"
