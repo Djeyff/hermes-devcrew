@@ -37,3 +37,8 @@ checks:
     rule: "before any release-lane mutation (merge/pin/tag), scan the board for a live sibling card targeting the same PR/branch and verify its claim age + pid liveness; the earlier live claim owns the lane, later dispatches must stand down and complete with a stand-down note"
     severity: block
     fixture: tests/release_harness/fixtures/duplicate_release_lane
+  - id: external-consume-while-inflight
+    incident: "RET-313 (retena-processor PR #122, t_3d115e89): the PR was auto-merged by app/retena-control-room at 18:28:35Z while the dispatched integrator run (claimed ~4 min earlier, still in its pre-mutation gate, zero writes) held the crew-side claim — approval had crossed to the merge bot outside the crew lane; a blind merge would have raced the bot"
+    rule: "before any release-lane mutation, re-verify the target's live state (open? head still the reviewed SHA? mergeable?) instead of trusting the card snapshot; if the target is already consumed (merged/closed/advanced), never repeat the mutation — verify the landed content equals the reviewed head (per-file blob identity; byte-exact 3-way reconstruction when a sibling interleaved on the same files) and land remaining follow-ups through the sanctioned channel (repo rulesets forbid direct main pushes — use a PR)"
+    severity: block
+    fixture: tests/release_harness/fixtures/external_consume_while_inflight
