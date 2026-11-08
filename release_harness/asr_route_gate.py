@@ -6,9 +6,12 @@ translates its exit contract into harness findings. The pack probes the D-13
 feature contract (a voice note on any supported route returns a transcript
 from its routed engine; a dry-quota engine falls over to the next engine; an
 all-dry ladder fails CLOSED — the note is never silently dropped):
-engine-route probes (whisper/soniox/deepgram), measured-ladder retention,
-dry-quota classification + fall-over + fail-closed shape, route-loop
-continuation and latency plumbing, fixture presence.
+engine-route probes on the ACTIVE pair (xai_grok a.k.a. Grok 2.0 via
+xAI /v1/stt, soniox_async_v5) plus the dry-quota fallback path between
+them (D-2026-11-08-15 scope; whisper/deepgram legs removed by owner
+order), measured-ladder retention, dry-quota classification + fall-over
++ fail-closed shape, route-loop continuation and latency plumbing,
+fixture presence.
 
 Exit mapping (a tool that cannot run must never read as PASS):
   pack exit 0 → PASS (no findings)
